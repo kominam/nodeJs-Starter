@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-starter",
+  "version": "1.0.0",
+  "description": "Learn NodeJs the hard way",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kominam/nodeJs-starter.git"
+  },
+  "author": "kominam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kominam/nodeJs-starter/issues"
+  },
+  "homepage": "https://github.com/kominam/nodeJs-starter#readme",
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0"
+  }
+}
