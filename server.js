@@ -5,17 +5,17 @@ const chalk = require('chalk')
 const app = express()
 const bodyParser = require('body-parser')
 const logger = require('morgan')
+const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URL)
-// const posts = require('./routes/web')
 
 app.set('port', process.env.PORT || 8080)
 app.set('view engine', 'pug')
-app.set('views', './app/views')
+app.set('views', './resources/views/')
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 app.use(logger('dev'))
-// app.use('/posts', posts)
 
 // router
 require('./routes/web')(app)

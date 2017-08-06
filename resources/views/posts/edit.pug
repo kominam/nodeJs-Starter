@@ -1,0 +1,14 @@
+extends ../layouts/application.pug
+block content
+  h2 Update #{post.title}
+  .row-lg
+    form(method='post', action='/posts/' + post._id + '?_method=PUT')
+      .form-group
+        label.col-sm-2 Title
+        .col-sm-10
+          input.form-control(type='text', name='title', value=post.title, required)
+      .form-group
+        label.col-sm-2 Content
+        .col-sm-10
+          textarea.form-control(name='content', rows='10', cols='10', id='content', required) #{post.content}
+      button.btn.btn-primary(type='submit') Update

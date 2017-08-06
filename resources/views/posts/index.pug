@@ -1,0 +1,37 @@
+extends ../layouts/application.pug
+block content
+  h4
+    | Post List
+  button.btn.btn-secondary
+    a(href='/posts/new')
+      i.fa.fa-plus
+  table.table
+    thead.thead-default
+      tr
+        th
+          | #
+        th
+          i.fa.fa-bullhorn
+          |  Title
+        th
+          i.fa.fa-snowflake-o
+          |  Content
+        th
+          i.fa.fa-cogs
+          |  Action
+    tbody
+      each post, index in posts
+        tr
+          td
+            | #{index + 1}
+          td
+            | #{post.title}
+          td
+            | #{post.content}
+          td
+            button.btn.btn-info
+              a(href='/posts/' + post._id + '/edit')
+                i.fa.fa-pencil
+            button.btn.btn-danger
+              i.fa.fa-trash
+        tr
