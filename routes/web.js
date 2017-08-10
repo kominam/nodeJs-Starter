@@ -1,6 +1,11 @@
 const postController = require('../app/Http/controllers/postController')
 
-module.exports = (app) => {
+module.exports = (app, passport) => {
+  app.get('/', (req, res) => {
+    res.render('index', { title: 'Homepage' })
+  })
+
+  // routes for post
   app.get('/posts', postController.index)
   app.get('/posts/new', postController.new)
   app.post('/posts', postController.create)
