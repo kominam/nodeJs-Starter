@@ -11,23 +11,28 @@
     "url": "git+https://github.com/kominam/nodeJs-starter.git"
   },
   "author": "kominam",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kominam/nodeJs-starter/issues"
   },
   "homepage": "https://github.com/kominam/nodeJs-starter#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
     "bootstrap": "^4.0.0-alpha.6",
     "chalk": "^2.0.1",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "express-flash": "0.0.2",
+    "express-session": "^1.15.5",
     "font-awesome": "^4.7.0",
     "method-override": "^2.3.9",
     "mongoose": "^4.11.5",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.3"
   },
   "devDependencies": {
