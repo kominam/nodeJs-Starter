@@ -1,0 +1,35 @@
+nav.navbar.navbar-toggleable-md.navbar-light(style="background-color: #e3f2fd;")
+  .navbar-header
+    a.navbar-brand(href='/') Node Hackathon
+  .collapse.navbar-collapse
+    ul.nav.navbar-nav
+      li
+        a(href='/posts') Posts
+    ul.nav.navbar-nav.ml-auto
+      li.dropdown
+        a.dropdown-toggle(href='#', data-toggle='dropdown')
+          b Login
+          span.caret
+        ul.dropdown-menu.dropdown-menu-right
+          li.dropdown-item
+            .row
+              .col-md-12
+                form(method='post', action='/login', accept-charset='UTF-8')
+                  .form-group
+                    label
+                    input.form-control(type='email', placeholder='Email address', required=true)
+                  .form-group
+                    label
+                    input.form-control(type='password', placeholder='Password', required=true)
+                  .help-block.text-right
+                    a(href='') Forget the password ?
+                  .checkbox
+                    label
+                      input(type='checkbox')
+                      |  Remember me
+                  .form-group
+                    button.btn.btn-primary.btn-block(type='submit') Sign in
+              .bottom.text-center
+                | New here ?
+                a(href='/register')
+                  |  Join us

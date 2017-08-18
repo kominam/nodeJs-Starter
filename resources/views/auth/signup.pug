@@ -1,0 +1,51 @@
+extends ../layouts/application.pug
+block content
+  .container
+    form.form-horizontal(method='post', action='/register')
+      .row
+        .col-md-3
+        .col-md-6
+          h2 Register new user
+          hr
+      .row
+        .col-md-3.field-label-responsive
+          label(for='name') Name
+        .col-md-6
+          .form-group
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon(style='width: 2.6rem')
+                i.fa.fa-user
+              input#name.form-control(type='text', name='name', placeholder='Username')
+      .row
+        .col-md-3.field-label-responsive
+          label(for='email') E-Mail Address
+        .col-md-6
+          .form-group
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon(style='width: 2.6rem')
+                i.fa.fa-at
+              input#email.form-control(type='text', name='email', placeholder='you@example.com')
+      .row
+        .col-md-3.field-label-responsive
+          label(for='password') Password
+        .col-md-6
+          .form-group
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon(style='width: 2.6rem')
+                i.fa.fa-key
+              input#password.form-control(type='password', name='password', placeholder='Password')
+      .row
+        .col-md-3.field-label-responsive
+          label(for='password') Confirm Password
+        .col-md-6
+          .form-group
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon(style='width: 2.6rem')
+                i.fa.fa-repeat
+              input#password-confirm.form-control(type='password', name='password-confirmation', placeholder='Password')
+      .row
+        .col-md-3
+        .col-md-6
+          button.btn.btn-success(type='submit')
+            i.fa.fa-user-plus
+            |  Register
