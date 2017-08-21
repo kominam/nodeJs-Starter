@@ -6,7 +6,10 @@ nav.navbar.navbar-toggleable-md.navbar-light(style="background-color: #e3f2fd;")
       li
         a(href='/posts') Posts
     ul.nav.navbar-nav.ml-auto
-      li.dropdown
+      if user
+        a.logout(href='/logout') Logout
+      else
+        li.dropdown
         a.dropdown-toggle(href='#', data-toggle='dropdown')
           b Login
           span.caret
@@ -19,7 +22,6 @@ nav.navbar.navbar-toggleable-md.navbar-light(style="background-color: #e3f2fd;")
                     label
                     input.form-control(type='email', placeholder='Email address', required=true)
                   .form-group
-                    label
                     input.form-control(type='password', placeholder='Password', required=true)
                   .help-block.text-right
                     a(href='') Forget the password ?
@@ -33,3 +35,9 @@ nav.navbar.navbar-toggleable-md.navbar-light(style="background-color: #e3f2fd;")
                 | New here ?
                 a(href='/register')
                   |  Join us
+
+style.
+  .dropdown-item:active {
+    color: inherit;
+    background: none
+  }

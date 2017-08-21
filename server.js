@@ -23,6 +23,7 @@ app.use(methodOverride('_method'))
 app.use(cookieParser())
 app.use(flash())
 app.use(logger('dev'))
+app.use(express.static(__dirname + '/public'))
 
 app.use(session({
   secret: process.env.SECRET_KEY,
