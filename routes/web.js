@@ -1,5 +1,4 @@
 const postController = require('../app/Http/controllers/postController')
-const registerController = require('../app/Http/controllers/auth/registerController')
 
 module.exports = (app, passport) => {
   app.get('/', (req, res) => {
@@ -11,7 +10,11 @@ module.exports = (app, passport) => {
     failureRedirect: '/',
     failureFlash: true
   }))
-  app.get('/register', registerController.showRegisterForm)
+
+  app.get('/register', (req, res) => {
+    res.render('auth/signup', { title: 'Register', message: req.flash('signupMessage') })
+  })
+
   app.post('/register', passport.authenticate('local-signup', {
     successRedirect: '/profile',
     failureRedirect: '/',
