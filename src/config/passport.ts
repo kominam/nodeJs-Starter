@@ -1,7 +1,8 @@
-const LocalStrategy = require('passport-local').Strategy
-const User = require('../app/models/User')
+import * as LocalStrategy from 'passport-local'
+LocalStrategy.Strategy
+import User from '../app/models/User'
 
-module.exports = (passport) => {
+export function configure(passport) {
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })
@@ -19,24 +20,22 @@ module.exports = (passport) => {
   }, (req, email, password, done) => {
     if (email) email = email.toLowerCase()
 
-    process.nextTick(() => {
-      User.findOne({ 'email': email }, (err, user) => {
-        if (err) return done(err)
+    User.findOne({ 'email': email }, (err, user) => {
+      if (err) return done(err)
 
-        if (user) {
-          return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
-        } else {
-          let newUser = new User()
-          newUser.email    = email
-          newUser.password = password
+      if (user) {
+        return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
+      } else {
+        let newUser = new User()
+        newUser.email    = email
+        newUser.password = password
 
-          newUser.save((err) => {
-            if (err)
-              throw err
-            return done(null, newUser)
-          })
-        }
-      })
+        newUser.save((err) => {
+          if (err)
+            throw err
+          return done(null, newUser)
+        })
+      }
     })
   }))
 

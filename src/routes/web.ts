@@ -1,6 +1,6 @@
-const postController = require('../app/Http/controllers/postController')
+import * as postController from '../app/Http/controllers/postController'
 
-module.exports = (app, passport) => {
+export function initialize(app, passport): void {
   app.get('/', (req, res) => {
     res.render('index', { title: 'Homepage' })
   })
@@ -22,8 +22,8 @@ module.exports = (app, passport) => {
   }))
 
   app.get('/posts', postController.index)
-  app.get('/posts/new', postController.new)
-  app.post('/posts', postController.create)
+  app.get('/posts/new', postController.create)
+  app.post('/posts', postController.store)
   app.get('/posts/:id/edit', postController.edit)
   app.put('/posts/:id', postController.update)
   app.delete('/posts/:id', postController.destroy)
