@@ -1,6 +1,6 @@
-const Post = require('../../models/Post')
+import Post from '../../models/Post'
 
-exports.index = (req, res) => {
+export function index(req, res) {
   Post.find((errors, posts) => {
     if (errors) {
       console.log('Errors occur: ', errors)
@@ -11,11 +11,11 @@ exports.index = (req, res) => {
   })
 }
 
-exports.new = (req, res) => {
+export function create(req, res) {
   res.render('posts/new', { title: 'New' })
 }
 
-exports.create = (req, res) => {
+export function store(req, res) {
   let post = new Post(req.body)
   post.save((error) => {
     if (error) {
@@ -28,7 +28,7 @@ exports.create = (req, res) => {
   })
 }
 
-exports.edit = (req, res) => {
+export function edit(req, res) {
   Post.findById(req.params.id, (error, post) => {
     if (error) {
       console.log('Errors occur: ' + error)
@@ -39,7 +39,7 @@ exports.edit = (req, res) => {
   })
 }
 
-exports.update = (req, res) => {
+export function update(req, res) {
   Post.findByIdAndUpdate(req.params.id, {
     $set: {
       title: req.body.title,
@@ -55,7 +55,7 @@ exports.update = (req, res) => {
   })
 }
 
-exports.destroy = (req, res) => {
+export function destroy(req, res) {
   Post.remove({ _id: req.params.id }, (error, posts) => {
     if (error) {
       res.status(500).send(error)
