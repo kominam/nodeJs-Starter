@@ -24,8 +24,8 @@ const userSchema = new Schema({
   }
 })
 
-userSchema.pre('save', (next) => {
-  let user = this
+userSchema.pre('save', function(next) {
+  const user = this
 
   if(!user.isModified('password')) return next()
 
@@ -41,7 +41,7 @@ userSchema.pre('save', (next) => {
   })
 })
 
-userSchema.methods.verifyPassword = (password) => {
+userSchema.methods.verifyPassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 

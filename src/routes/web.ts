@@ -5,7 +5,7 @@ export function initialize(app, passport): void {
     res.render('index', { title: 'Homepage' })
   })
 
-  app.post('/login', passport.authenticate('local-login', {
+  app.post('/login', passport.authenticate('login', {
     successRedirect: '/profile',
     failureRedirect: '/',
     failureFlash: true
@@ -15,7 +15,7 @@ export function initialize(app, passport): void {
     res.render('auth/signup', { title: 'Register', message: req.flash('signupMessage') })
   })
 
-  app.post('/register', passport.authenticate('local-signup', {
+  app.post('/register', passport.authenticate('register', {
     successRedirect: '/profile',
     failureRedirect: '/',
     failureFlash: true
