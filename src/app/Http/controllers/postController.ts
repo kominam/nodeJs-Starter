@@ -1,14 +1,13 @@
 import Post from '../../models/Post'
 
-export function index(req, res) {
-  Post.find((errors, posts) => {
-    if (errors) {
-      console.log('Errors occur: ', errors)
-      res.status(500).send(errors) // status 500
-    } else {
-      res.render('posts/index', { title: 'Posts', posts: posts })
-    }
-  })
+export async function index(req, res) {
+  try {
+    let posts = await Post.find()
+    res.render('posts/index', { title: 'Posts', posts: posts })
+  } catch(error) {
+    console.log('Errors occur: ', error)
+    res.status(500).send(error) // status 500
+  }
 }
 
 export function create(req, res) {
@@ -28,31 +27,30 @@ export function store(req, res) {
   })
 }
 
-export function edit(req, res) {
-  Post.findById(req.params.id, (error, post) => {
-    if (error) {
-      console.log('Errors occur: ' + error)
-      res.status(500).send(error) // status 500
-    } else {
-      res.render('posts/edit', { title: 'Edit post', post: post })
-    }
-  })
+export async function edit(req, res) {
+  try {
+    let post = await Post.findById(req.params.id)
+    res.render('posts/edit', { title: 'Edit post', post: post })
+  } catch(error) {
+    console.log('Errors occur: ' + error)
+    res.status(500).send(error) // status 500
+  }
 }
 
-export function update(req, res) {
-  Post.findByIdAndUpdate(req.params.id, {
-    $set: {
-      title: req.body.title,
-      content: req.body.content
-    }
-  }, (error, posts) => {
-    if (error) {
-      console.log('Errors occur: ' + error)
-      res.status(500).send(error)
-      res.render('posts/edit', { posts: req.body })
-    }
+export async function update(req, res) {
+  try {
+    let post = await Post.findByIdAndUpdate(req.params.id, {
+        $set: {
+          title: req.body.title,
+          content: req.body.content
+        }
+      })
     res.redirect('/posts')
-  })
+  } catch(error) {
+    console.log('Errors occur: ' + error)
+    res.status(500).send(error)
+    res.render('posts/edit', { posts: req.body })
+  }
 }
 
 export function destroy(req, res) {

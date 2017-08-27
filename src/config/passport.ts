@@ -13,45 +13,52 @@ export function configure(passport) {
     })
   })
 
-  passport.use('local-signup', new LocalStrategy({
+  passport.use('register', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
   }, (req, email, password, done) => {
     if (email) email = email.toLowerCase()
 
-    User.findOne({ 'email': email }, (err, user) => {
-      if (err) return done(err)
-
+    User.findOne({
+      'email': email
+    }).then((user) => {
       if (user) {
         return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
       } else {
         let newUser = new User()
         newUser.email    = email
         newUser.password = password
-
-        newUser.save((err) => {
-          if (err)
-            throw err
+        newUser.save().then((newUser) => {
           return done(null, newUser)
+        }).catch((error) => {
+          return done(error)
         })
       }
+    }).catch((error) => {
+       if (error) return done(error)
     })
   }))
 
-  passport.use('local-login', new LocalStrategy({
+  passport.use('login', new LocalStrategy({
+    // by default, local strategy uses username and password, we will override with email
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback: true
-  }, (req, email, password, done) => {
-    User.findOne({ 'email': email }, (err, user) => {
-      if(err) return done(err)
-
-      if (!user) return done(null, false, req.flash('loginMessage', 'No user found.'))
-
-      if (!user.verifyPassword(password)) return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'))
-
-      return done(null, user)
+    passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+  }, function(req, email, password, done) {
+    if (email) email = email.toLowerCase()
+    // asynchronous
+    process.nextTick(function() {
+      User.findOne({
+        'email': email
+      }).then((user) => {
+        // if no user is found, return the message
+        if (!user) return done(null, false, req.flash('loginMessage', 'No user found.'))
+        if (!user.verifyPassword(password)) return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'))
+        return done(null, user)
+      }).catch((error) => {
+        if (error) return done(error)
+      })
     })
   }))
 }
