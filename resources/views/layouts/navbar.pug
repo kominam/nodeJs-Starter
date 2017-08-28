@@ -7,7 +7,9 @@ nav.navbar.navbar-toggleable-md.navbar-light(style="background-color: #e3f2fd;")
         a(href='/posts') Posts
     ul.nav.navbar-nav.ml-auto
       if user
-        a.logout(href='/logout') Logout
+        | #{user.email}
+        a.logout(href='/logout')
+          i.fa.fa-sign-out
       else
         li.dropdown
         a.dropdown-toggle(href='#', data-toggle='dropdown')
