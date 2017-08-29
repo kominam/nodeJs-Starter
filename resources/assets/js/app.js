@@ -1,3 +1,3 @@
-require('bootstrap')
-require('bootstrap/dist/css/bootstrap.css')
-require('font-awesome/scss/font-awesome.scss')
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'font-awesome/scss/font-awesome.scss'

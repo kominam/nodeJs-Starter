@@ -11,6 +11,8 @@ import * as session from 'express-session'
 import * as cookieParser from 'cookie-parser'
 import * as flash from 'express-flash'
 import * as Promise from 'bluebird'
+import * as connectMongo from 'connect-mongo'
+const MongoStore = connectMongo(session)
 
 dotenv.load()
 
@@ -35,7 +37,12 @@ app.use(express.static('./public'))
 app.use(session({
   secret: process.env.SECRET_KEY,
   saveUninitialized: true,
-  resave: true
+  resave: true,
+  store: new MongoStore({
+    url: process.env.MONGODB_URL,
+    autoReconnect: true,
+    clear_interval: 3600
+  })
 }))
 app.use(passport.initialize())
 app.use(passport.session())

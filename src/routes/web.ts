@@ -1,4 +1,5 @@
 import * as postController from '../app/Http/controllers/postController'
+import * as middleware from '../app/Http/Middleware/middleware'
 
 export function initialize(app, passport): void {
   app.get('/', (req, res) => {
@@ -11,8 +12,17 @@ export function initialize(app, passport): void {
     failureFlash: true
   }))
 
+  app.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+  })
+
   app.get('/register', (req, res) => {
     res.render('auth/signup', { title: 'Register', message: req.flash('signupMessage') })
+  })
+
+  app.get('/profile', (req, res) => {
+    res.render('auth/profile', { title: 'Profile', user: req.user })
   })
 
   app.post('/register', passport.authenticate('register', {
