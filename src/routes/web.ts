@@ -21,7 +21,7 @@ export function initialize(app, passport): void {
     res.render('auth/signup', { title: 'Register', message: req.flash('signupMessage') })
   })
 
-  app.get('/profile', (req, res) => {
+  app.get('/profile', middleware.isAuthenticated, (req, res) => {
     res.render('auth/profile', { title: 'Profile', user: req.user })
   })
 

@@ -1,5 +1,4 @@
 import * as express from 'express'
-import { Response, Request } from 'express'
 import * as chalk from 'chalk'
 import * as dotenv from 'dotenv'
 import * as bodyParser from 'body-parser'
@@ -33,7 +32,6 @@ app.use(cookieParser())
 app.use(flash())
 app.use(logger('dev'))
 app.use(express.static('./public'))
-
 app.use(session({
   secret: process.env.SECRET_KEY,
   saveUninitialized: true,
@@ -46,10 +44,10 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-// app.use((req: Request, res: Response, next) => {
-//   console.log(req.user)
-// })
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 // router
 import * as passportConfig from './config/passport'
