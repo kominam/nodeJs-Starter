@@ -21,38 +21,6 @@ block content
                 h6 Hobbies
                 p
                   | Indie music, skiing and hiking. I love the great outdoors.
-              .col-md-12
-                h4.m-t-2
-                  span.fa.fa-clock-o.ion-clock.pull-xs-right
-                  |  Recent Activity
-                table.table.table-hover.table-striped
-                  tbody
-                    tr
-                      td
-                        strong Abby
-                        |  joined ACME Project Team in
-                        strong `Collaboration`
-                    tr
-                      td
-                        strong Gary
-                        |  deleted My Board1 in
-                        strong `Discussions`
-                    tr
-                      td
-                        strong Kensington
-                        |  deleted MyBoard3 in
-                        strong `Discussions`
-                    tr
-                      td
-                        strong John
-                        |  deleted My Board1 in
-                        strong `Discussions`
-                    tr
-                      td
-                        strong Skell
-                        |  deleted his post Look at Why this is.. in
-                        strong `Discussions`
-            // /row
           #messages.tab-pane
             h4.m-y-2 Recent Messages & Notifications
             .alert.alert-info.alert-dismissable
@@ -60,51 +28,44 @@ block content
               |  This is an
               strong .alert
               | . Use this to show important messages to the user.
-            table.table.table-hover.table-striped
-              tbody
-                tr
-                  td
-                    span.pull-xs-right.font-weight-bold 3 hrs ago
-                    |  Here is your a link to the latest summary report from the..
-                tr
-                  td
-                    span.pull-xs-right.font-weight-bold Yesterday
-                    |  There has been a request on your account since that was..
-                tr
-                  td
-                    span.pull-xs-right.font-weight-bold 9/10
-                    |  Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                tr
-                  td
-                    span.pull-xs-right.font-weight-bold 9/4
-                    |  Vestibulum tincidunt ullamcorper eros eget luctus.
           #edit.tab-pane
             h4.m-y-2 Edit Profile
-            form(role='form')
+            form(method='post', action='/users/' + user._id + '?_method=PUT')
               .form-group.row
                 label.col-lg-3.col-form-label.form-control-label Username
                 .col-lg-9
-                  input.form-control(type='text', value=user.username)
+                  input.form-control(type='text', name='name', value=user.profile.name)
               .form-group.row
                 label.col-lg-3.col-form-label.form-control-label Email
                 .col-lg-9
-                  input.form-control(type='email', value=user.email)
+                  input.form-control(type='email', name='email', value=user.email)
               .form-group.row
-                label.col-lg-3.col-form-label.form-control-label Password
+                label.col-lg-3.col-form-label.form-control-label Gender
                 .col-lg-9
-                  input.form-control(type='password')
+                  label.radio.col-sm-3
+                    input(type='radio', checked=user.profile.gender=='male', name='gender', value='Male')
+                    span Male
+                  label.radio.col-sm-3
+                    input(type='radio', checked=user.profile.gender=='female', name='gender', value='Female')
+                    span Female
+                  label.radio.col-sm-3
+                    input(type='radio', checked=user.profile.gender=='other', name='gender', value='Other')
+                    span Others
               .form-group.row
-                label.col-lg-3.col-form-label.form-control-label Confirm password
+                label.col-lg-3.col-form-label.form-control-label Address
                 .col-lg-9
-                  input.form-control(type='password')
+                  input.form-control(type='text', name='address', value=user.profile.address)
               .form-group.row
                 label.col-lg-3.col-form-label.form-control-label
                 .col-lg-9
                   input.btn.btn-secondary(type='reset', value='Cancel')
-                  input.btn.btn-primary(type='button', value='Save Changes')
+                  input.btn.btn-primary(type='submit', value='Save Changes')
       .col-lg-4.pull-lg-8.text-xs-center
-        img.m-x-auto.img-fluid.img-circle(src='//placehold.it/150', alt='avatar')
-        h6.m-t-2 Upload a different photo
-        label.custom-file
-          input#file.custom-file-input(type='file')
-          span.custom-file-control Choose file
+        if (user.profile.picture)
+          img.m-x-auto.img-fluid.rounded-circle(src=user.profile.picture, alt='avatar')
+        else
+          img.m-x-auto.img-fluid.rounded-circle(src='//placehold.it/150', alt='avatar')
+        form(method='post',action='/profile/avatar', enctype="multipart/form-data")
+          label.custom-file
+            input#file(type='file', name='avatar')
+            button.btn.btn-primary(type='submit') Upload

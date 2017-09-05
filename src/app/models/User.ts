@@ -3,9 +3,6 @@ import * as bcrypt from 'bcrypt'
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-  username: {
-    type: String
-  },
   email: {
     type: String,
     validate: {
@@ -16,7 +13,13 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  password: String
+  password: String,
+  profile: {
+    name: String,
+    gender: String,
+    address: String,
+    picture: String
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',

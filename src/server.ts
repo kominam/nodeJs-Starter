@@ -11,6 +11,8 @@ import * as cookieParser from 'cookie-parser'
 import * as flash from 'express-flash'
 import * as Promise from 'bluebird'
 import * as connectMongo from 'connect-mongo'
+import * as  expressValidator from 'express-validator'
+import * as cors from 'cors'
 const MongoStore = connectMongo(session)
 
 dotenv.load()
@@ -31,6 +33,7 @@ app.use(methodOverride('_method'))
 app.use(cookieParser())
 app.use(flash())
 app.use(logger('dev'))
+app.use(expressValidator())
 app.use(express.static('./public'))
 app.use(session({
   secret: process.env.SECRET_KEY,
@@ -44,6 +47,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cors())
 app.use((req, res, next) => {
   res.locals.user = req.user
   next()
