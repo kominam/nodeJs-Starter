@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon dist/server.js",
     "build": "webpack",
-    "watch": "webpack --watch",
-    "start": "webpack-dev-server --hot --inline"
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -34,13 +33,15 @@
     "express-validator": "^4.1.1",
     "font-awesome": "^4.7.0",
     "method-override": "^2.3.9",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.5",
     "morgan": "^1.8.2",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.12.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.3",
-    "typescript": "^2.4.2"
+    "typescript": "^2.4.2",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "cors": "^2.8.4",
@@ -53,7 +54,6 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+    "webpack": "^3.5.5"
   }
 }

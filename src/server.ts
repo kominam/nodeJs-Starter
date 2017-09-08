@@ -13,6 +13,7 @@ import * as Promise from 'bluebird'
 import * as connectMongo from 'connect-mongo'
 import * as  expressValidator from 'express-validator'
 import * as cors from 'cors'
+import theLogger from './app/logger/log'
 const MongoStore = connectMongo(session)
 
 dotenv.load()
@@ -60,7 +61,7 @@ passportConfig.configure(passport)
 routes.initialize(app, passport)
 
 app.listen(app.get('port'), () => {
-  console.log('%s App is running at port %d in %s env\n',
+  theLogger.info('%s App is running at port %d in %s env\n',
     chalk.green('✓'),
     app.get('port'),
     app.get('env'))
