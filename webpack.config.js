@@ -28,6 +28,9 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    contentBase: './dist'
+  },
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
