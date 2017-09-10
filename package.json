@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon dist/server.js",
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "lint": "./node_modules/.bin/tslint --project ."
   },
   "repository": {
     "type": "git",
@@ -53,6 +54,7 @@
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "tslint": "^5.7.0",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5"
   }

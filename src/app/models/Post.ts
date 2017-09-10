@@ -10,7 +10,7 @@ const postSchema = new Schema({
   content: {
     type: String,
     required: true
-  },
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',

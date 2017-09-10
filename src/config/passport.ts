@@ -23,18 +23,16 @@ export function configure(passport) {
     User.findOne({
       'email': email
     }).then((user) => {
-      if (user) {
-        return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
-      } else {
-        let newUser = new User()
-        newUser.email    = email
-        newUser.password = password
-        newUser.save().then((newUser) => {
-          return done(null, newUser)
-        }).catch((error) => {
-          return done(error)
-        })
-      }
+      if (user) return done(null, false, req.flash('signupMessage', 'That email is already taken.'))
+
+      let newUser = new User()
+      newUser.email    = email
+      newUser.password = password
+      newUser.save().then((newUser) => {
+        return done(null, newUser)
+      }).catch((error) => {
+        return done(error)
+      })
     }).catch((error) => {
        if (error) return done(error)
     })

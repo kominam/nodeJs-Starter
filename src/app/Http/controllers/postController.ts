@@ -22,9 +22,8 @@ export function store(req, res) {
       theLogger.error(error)
       res.status(500).send(error) // status 500
       res.redirect('posts/new')
-    } else {
-      res.redirect('posts')
     }
+    res.redirect('posts')
   })
 }
 
@@ -56,10 +55,7 @@ export async function update(req, res) {
 
 export function destroy(req, res) {
   Post.remove({ _id: req.params.id }, (error, posts) => {
-    if (error) {
-      res.status(500).send(error)
-    } else {
-      res.redirect('posts')
-    }
+    if (error) res.status(500).send(error)
+    res.redirect('posts')
   })
 }
