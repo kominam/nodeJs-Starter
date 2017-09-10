@@ -1,0 +1,17 @@
+sudo: false
+dist: trusty
+language: node_js
+node_js:
+  - "8"
+cache:
+  directories:
+    - "node_modules"
+before_install:
+  - npm i -g npm@5
+  - npm i -g typescript
+  - npm i -g webpack
+install:
+  - npm install
+services:
+  - mongodb
+scripts: npm run lint

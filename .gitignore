@@ -3,5 +3,5 @@ node_modules
 public/*
 !public/storage
 dist
-storage
+storage/*
 log/*

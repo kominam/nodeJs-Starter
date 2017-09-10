@@ -19,7 +19,7 @@ const userSchema = new Schema({
     gender: String,
     address: String,
     picture: String
-  },
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',
