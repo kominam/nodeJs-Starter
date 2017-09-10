@@ -1,8 +1,8 @@
-import * as winston from 'winston'
-import * as path from 'path'
-import * as moment from 'moment'
+import * as winston from 'winston';
+import * as path from 'path';
+import * as moment from 'moment';
 
-const theLogger = new (winston.Logger)({
+const log = new (winston.Logger)({
   transports: [
     // info console log
     new (winston.transports.Console)({
@@ -10,7 +10,7 @@ const theLogger = new (winston.Logger)({
       name: 'info-console',
       colorize: true,
       timestamp: () => moment().format('YYYY-MM-DD HH-mm-ss'),
-      formatter: (options) => `[${options.timestamp()}]: ${options.message || ''}`
+      formatter: options => `[${options.timestamp()}]: ${options.message || ''}`
     }),
     // info log file
     new (winston.transports.File)({
@@ -18,7 +18,7 @@ const theLogger = new (winston.Logger)({
       name: 'info-file',
       filename: path.resolve(__dirname, '../../..', 'log', 'development-info.log'),
       timestamp: () => moment().format('YYYY-MM-DD HH-mm-ss'),
-      formatter: (options) => `[${options.timestamp()}]: ${options.message || ''}`,
+      formatter: options => `[${options.timestamp()}]: ${options.message || ''}`,
       json: false
     }),
     // errors console log
@@ -27,7 +27,7 @@ const theLogger = new (winston.Logger)({
       name: 'error-console',
       colorize: true,
       timestamp: () => moment().format('YYYY-MM-DD HH-mm-ss'),
-      formatter: (options) => `[${options.timestamp()}]: ${options.message || ''}`
+      formatter: options => `[${options.timestamp()}]: ${options.message || ''}`
     }),
     // errors log file
     new (winston.transports.File)({
@@ -35,10 +35,10 @@ const theLogger = new (winston.Logger)({
       name: 'error-file',
       filename: path.resolve(__dirname, '../../..', 'log', 'development-errors.log'),
       timestamp: () => moment().format('YYYY-MM-DD HH-mm-ss'),
-      formatter: (options) => `[${options.timestamp()}]: ${options.message || ''}`,
+      formatter: options => `[${options.timestamp()}]: ${options.message || ''}`,
       json: false
     })
   ]
-})
+});
 
-export default theLogger
+export default log;
