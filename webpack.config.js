@@ -3,7 +3,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
-  entry: './resources/assets/js/app.js',
+  entry: {
+    'js/app': './resources/assets/js/app.js',
+    'js/post': './resources/assets/js/post.js'
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: '[name].js',

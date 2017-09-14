@@ -11,7 +11,7 @@ import * as cookieParser from 'cookie-parser';
 import * as flash from 'express-flash';
 import * as Promise from 'bluebird';
 import * as connectMongo from 'connect-mongo';
-import * as  expressValidator from 'express-validator';
+import * as expressValidator from 'express-validator';
 import * as cors from 'cors';
 import * as passportConfig from './config/passport';
 import * as routes from './routes/web';

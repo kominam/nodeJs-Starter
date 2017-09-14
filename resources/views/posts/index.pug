@@ -2,9 +2,26 @@ extends ../layouts/application.pug
 block content
   h4
     | Post List
-  button.btn.btn-secondary
-    a(href='/posts/new')
-      i.fa.fa-plus
+  button.btn.btn-primary(type='button', data-toggle='modal', data-target='#newPost')
+    i.fa.fa-plus
+  #newPost.modal.fade(tabindex='-1', role='dialog', aria-labelledby='newPostLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#newPostLabel.modal-title New post
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+        .modal-body
+          form(method='post', action='/posts')
+            .form-group
+              label.col-sm-2 Title
+              .col-sm-10
+                input.form-control(type='text', name='title', required)
+            .form-group
+              label.col-sm-2 Content
+              .col-sm-10
+                textarea.form-control(name='content', rows='10', cols='10', id='content', required)
+            button.btn.btn-primary(type='submit') Create
   table.table
     thead.thead-default
       tr
@@ -32,6 +49,10 @@ block content
             button.btn.btn-info
               a(href='/posts/' + post._id + '/edit')
                 i.fa.fa-pencil
-            button.btn.btn-danger
+            button.btn.btn-danger.delPost(data-post-id=post._id)
               i.fa.fa-trash
         tr
+block script
+  script(src="https://unpkg.com/axios/dist/axios.min.js")
+  script(src='/js/post.js')
+

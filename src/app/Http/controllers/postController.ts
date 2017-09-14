@@ -53,9 +53,14 @@ export async function update(req, res) {
   }
 }
 
-export function destroy(req, res) {
-  Post.remove({ _id: req.params.id }, (error, posts) => {
-    if (error) res.status(500).send(error);
-    res.redirect('posts');
-  });
+export async function destroy(req, res) {
+  try {
+    const isDeleted = await Post.findByIdAndRemove({ _id: req.params.id });
+    res.status(200).json({
+      isDelete: 'done'
+    });
+  } catch (error) {
+    log.error(error);
+    res.status(500).send(error);
+  }
 }
